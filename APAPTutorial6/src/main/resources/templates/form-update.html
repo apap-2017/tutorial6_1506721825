@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>update student</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"></link>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div th:replace="fragments/fragment :: header"></div>
+		
+	<h1 class="page-header">Problem Editor</h1>
+
+	<form action="/student/update/submit" method="post" th:object="${student}">
+		<div>
+			<label for="npm">NPM</label> <input readonly="true" th:field="*{npm}" th:value="${student.npm}" type="text" name="npm" />
+		</div>
+		<div>
+			<label for="name">Name</label> <input type="text" th:field="*{name}" th:value="${student.name}" name="name" />
+		</div>
+		<div>
+			<label for="gpa">GPA</label> <input readonly="true" th:field="*{gpa}" th:value="${student.gpa}" type="text" name="gpa" />
+		</div>
+
+		<div>
+			<button type="submit" name="action" value="save">Save</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
+

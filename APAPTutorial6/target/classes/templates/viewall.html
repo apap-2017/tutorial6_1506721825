@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View All Students</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"></link>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" crossorigin="anonymous"></link>
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+				$('#example').DataTable();
+			} );
+		</script>	
+		
+	</head>
+    <body>
+	<div th:replace="fragments/fragment :: header"></div>
+		
+        <h1>All Students!</h1>
+    	<table id="example" class="display" cellspacing="0" width="100%">	
+		<thead>
+			<tr>
+                <th>Number</th>
+                <th>NPM</th>
+                <th>Name</th>
+                <th>GPA</th>
+                <th>Cum Laude</th>
+                <th>Kuliah yang diambil</th>
+				<th></th>
+				<th></th>
+            </tr>
+		</thead>
+		<tr th:each="student,iterationStatus: ${students}">
+			<td th:text="${iterationStatus.count}">No. 1</td>
+	       	<td th:text="${student.npm}">Student NPM</td>
+	       	<td th:text="${student.name}">Student Name</td>
+	       	<td th:text="${student.gpa}">Student GPA</td>
+			<td th:text="${student.gpa >= 3.49} ? 'Cum Laude!' : 'Sangat Memuaskan'">Cum Laude!</td>
+			<td><ul th:each="course,iterationStatus: ${student.courses}">
+				<li th:text="${course.name} + '-' + ${course.credits} + ' sks'">
+					Nama kuliah-X SKS
+				</li>
+			</ul></td>
+			<td><a th:href="'/student/delete/' + ${student.npm}"> delete data</a></td>
+			<td><a th:href="'/student/update/' + ${student.npm}"> update data</a></td>
+       	</tr>
+		</table>
+    </body>
+</html>
